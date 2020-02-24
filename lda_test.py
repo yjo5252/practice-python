@@ -1,6 +1,3 @@
-// 코드 분석 
-//lda algorithm 
-
 from tensorflow.keras.preprocessing.text import text_to_word_sequence
 import pandas as pd
 from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
@@ -66,11 +63,17 @@ for i in range(file_count):
     docs_ko.append(contents)
 
     from konlpy.tag import Okt; t=Okt()
+    texts_ko = t.nouns(docs_ko[0])
+
+    '''
     texts_ko = t.pos(docs_ko[0], norm=True)
     nouns = [n for n, tag in texts_ko if tag == 'Noun']
-
+    
     pos = lambda d: ['/'.join(p) for p in t.pos(d, stem=True, norm=True)]
     texts_ko = [pos(doc) for doc in nouns]
+    '''
+    pos = lambda d: ['/'.join(p) for p in t.pos(d)]
+    texts_ko = [pos(doc) for doc in texts_ko]
 
     #encode tokens to integers
 
@@ -86,20 +89,28 @@ for i in range(file_count):
     tfidf_ko = tfidf_model_ko[tf_ko]
     corpora.MmCorpus.serialize('ko.mm', tfidf_ko) # save corpus to file for future use
 
-    ntopics, nwords = 3, 5
+    ntopics, nwords = 5,4
     import numpy as np; np.random.seed(42)
 
     #LDA
     import numpy as np; np.random.seed(42)  # optional
-
-    print(path)
     lda_ko = models.ldamodel.LdaModel(tfidf_ko, id2word=dictionary_ko, num_topics=ntopics)
+    print(path)
+    lda_list = lda_ko.print_topics(num_topics=ntopics, num_words=nwords)
+
+    import re
+    reg = "[\'\"][^\'\"]+[\'\"]"
+
+    for t in lda_list:
+        #splits = t[1].split
+        result = re.findall(reg, t[1])
+        print(result[0])
+
 
     bow = tfidf_model_ko[dictionary_ko.doc2bow(texts_ko[0])]
     l=sorted(lda_ko[bow], key=lambda x: x[1], reverse=True)
     index=l[0][0]
 
-    print(lda_ko.print_topics(num_topics=ntopics, num_words=nwords)[index])
 
 
     print("\n")
