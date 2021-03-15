@@ -33,7 +33,7 @@ lps[] 값 : 다음에 조사할 인덱스를 정하는 기준이 된다.
    
    # 항상 lps[0] == 0 이므로 while 문은 i=1 부터 시작한다. 
    i = 1
-   while i < leng(pat):
+   while i < len(pat):
      # 이전 인덱스에서 같았다면 다음 인덱스만 비교하면 된다.
      if pat[i] == pat[leng]: 
        leng += 1
