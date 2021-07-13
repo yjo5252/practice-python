@@ -48,7 +48,7 @@ for k in combinations(friends, 2):
 ('홍' '이')
 ('성' '이')
 ```
-# random 
+## random 
 * 난수를 발생시켜서 시뮬레이션, 테스트에서 사용된다. 
 * `randrange(stop)`: 0 ~ stop-1 수를 발생 
 * `randrange(start, stop[, step])`: start - stop-1 수를 발생시킨다 (step 지정되면 건너뛴 수는 발생 안한다.)
@@ -62,7 +62,7 @@ print(x)
 
 ```
 
-# heapq 
+## heapq 
 * 최소힙(minheap)만 을 사용할 수 있게 제공한다.
 * list 자료구조를 이용해 구현한다. 
 * 최대힙(maxheap)은 heapq를 응용 혹은 직접 구현.
@@ -79,7 +79,7 @@ heapq.heapify(h) # O(N)
 print([heapq.heappop(h) for _ in range(len(h)) ]) # O(logN) O(Nlogn) ==> O(N(logN+1)) = O(Nlog2N)
 ```
 
-# bisect 
+## bisect 
 * binary + 
 * 이미 정렬된 리스트에서 원하는 아이템을 끼어넣기 할 위치를 이진탐색으로 찾는다. 
     * `bisect_left(list, x)` : list에서 x 를 끼어넣어야할 위치를 왼쪽에서 찾는다. 
@@ -97,7 +97,7 @@ print(bisect_right(4)) # 4
 ```
 
 
-# queue 
+## queue 
 * queue는 큐 자료구조를 따로 구현한다. 
 * 일반 큐, 우선순위큐, 큐, LIFO 큐 
   * `qsize()`: 큐에 들어있는 아이템의 개수 출력 
@@ -118,4 +118,6 @@ println(q.empty())#True
 ```
 
 
-
+------------
+* 2021.7.12 (monday)
+* 알고리즘 코딩테스트 교육 day 1
